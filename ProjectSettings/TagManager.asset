@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Wall
   - Ball
+  - FireStart
+  - Block
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - 
   - 
   - BackGround
-  - 
-  - 
+  - Block
+  - Input
   - 
   - 
   - 
@@ -40,9 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Block
+    uniqueID: 1961510121
+    locked: 0
   - name: BackGound
     uniqueID: 2775260795
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Input
+    uniqueID: 1006189857
     locked: 0
