@@ -29,7 +29,7 @@ public class BallController : MonoBehaviour {
         //}
 
         // Move laser in velocity style
-        GetComponent<Rigidbody2D>().velocity = Speed * transform.up;
+        //GetComponent<Rigidbody2D>().velocity = Speed * transform.up;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -54,21 +54,20 @@ public class BallController : MonoBehaviour {
         //}
     }
 
-    public void HandlingMousePressed(Vector2 mousePos)
-    {
-        Vector2 ballPos = new Vector2(transform.position.x, transform.position.y);
-        Vector2 direction = (mousePos - ballPos).normalized;
-        transform.up = direction;        
-        Direction = direction;
-    }
-
-    public IEnumerator Move(Vector2 direction)
+    public IEnumerator Move()
     {       
         while (true)
         {
-            transform.Translate(transform.up * Time.deltaTime, Space.World);
+            transform.Translate(transform.up * Speed * Time.deltaTime, Space.World);
             yield return null;
         }
     }    
 
+    public void StartShooting(Vector2 mousePos)
+    {
+        var worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector2 shootDir = transform.position - worldMousePos;
+        transform.up = shootDir;
+        StartCoroutine(Move());
+    }
 }

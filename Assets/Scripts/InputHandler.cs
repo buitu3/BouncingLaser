@@ -60,6 +60,11 @@ public class InputHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerUp(PointerEventData data)
     {
+        if (isAimMove)
+        {
+            ballController.StartShooting(data.position);
+        }
+
         isAimMove = false;
         rayShooter.DisableRay();
     }

@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 212753144930884554}
   - component: {fileID: 61580699716812652}
   - component: {fileID: 114078903150622896}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: YellowBlock
-  m_TagString: Wall
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,6 +79,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 0
+  sprites:
+  - {fileID: 21300000, guid: e9033a1b08c45d94ba350d9682c3490d, type: 3}
+  - {fileID: 21300000, guid: de06a4ff07e3f2b46b0e15b088582c04, type: 3}
+  - {fileID: 21300000, guid: db69e24a40d802f488097a6d06113f5d, type: 3}
+  - {fileID: 21300000, guid: e037fa54a2014474cb73dd2dde8fd566, type: 3}
 --- !u!212 &212753144930884554
 SpriteRenderer:
   m_ObjectHideFlags: 1

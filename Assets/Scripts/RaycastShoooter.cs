@@ -9,7 +9,9 @@ public class RaycastShoooter : MonoBehaviour
     public int RayCount;
     public GameObject Ball;
 
-    public Color lineColor;
+    public Color LineColor;
+    public Material LineMaterial;
+    public Texture lineTexture;
 
     private float RayLength = 100f;
     private LineRenderer Line;
@@ -23,8 +25,14 @@ public class RaycastShoooter : MonoBehaviour
         WallLayer = LayerMask.NameToLayer("Block");
         WallMask = 1 << WallLayer;
 
-        //aimLine = VectorLine.SetLine(lineColor, new Vector2(0f, 0f), new Vector2(0f, 0f));
-        aimLine = new VectorLine("aimLine", new List<Vector2>(), 1f);
+        // Setup LineRenderer Color
+        Line.startColor = LineColor;
+        Line.endColor = LineColor;
+
+        // Setup Vectrosity Line
+        //aimLine = new VectorLine("aimLine", new List<Vector2>(), lineTexture, 2f, LineType.Continuous);
+        //aimLine.SetColor(LineColor);
+        //aimLine.material = LineMaterial;
     }
 
     void Update() {
@@ -68,25 +76,6 @@ public class RaycastShoooter : MonoBehaviour
         //}
 
         // RaycastAll way 
-        //for (int i = 0; i < RayCount; i++)
-        //{
-        //    ListPos.Add(rayPos);
-        //    Debug.DrawRay(rayPos, rayDir * RayLength, Color.green);
-        //    RaycastHit2D[] hits = Physics2D.RaycastAll(rayPos, rayDir, RayLength, WallMask);           
-
-        //    rayDir = Vector2.Reflect(hits[0].point - rayPos, hits[0].normal);
-        //    rayPos = hits[0].point;
-        //}
-        //ListPos.Add(rayPos);
-
-        //Line.positionCount = ListPos.Count;
-        //// Draw linerenderer
-        //for (int i = 0; i < ListPos.Count; i++)
-        //{
-        //    Line.SetPosition(i, ListPos[i]);
-        //}
-
-        // Using Vectrosity line
         for (int i = 0; i < RayCount; i++)
         {
             ListPos.Add(rayPos);
@@ -98,14 +87,33 @@ public class RaycastShoooter : MonoBehaviour
         }
         ListPos.Add(rayPos);
 
+        Line.positionCount = ListPos.Count;
+        // Draw linerenderer
         for (int i = 0; i < ListPos.Count; i++)
         {
-            ListPos[i] = Camera.main.WorldToScreenPoint(ListPos[i]);
+            Line.SetPosition(i, ListPos[i]);
         }
 
-        aimLine = VectorLine.SetLine(lineColor, ListPos.ToArray());
-        //aimLine.points2.Add()
-        aimLine.Draw();
+        // Using Vectrosity line
+        //for (int i = 0; i < RayCount; i++)
+        //{
+        //    ListPos.Add(rayPos);
+        //    Debug.DrawRay(rayPos, rayDir * RayLength, Color.green);
+        //    RaycastHit2D[] hits = Physics2D.RaycastAll(rayPos, rayDir, RayLength, WallMask);
+
+        //    rayDir = Vector2.Reflect(hits[0].point - rayPos, hits[0].normal);
+        //    rayPos = hits[0].point;
+        //}
+        //ListPos.Add(rayPos);
+
+        //for (int i = 0; i < ListPos.Count; i++)
+        //{
+        //    ListPos[i] = Camera.main.WorldToScreenPoint(ListPos[i]);
+        //}
+
+        //aimLine.points2 = ListPos;
+        ////aimLine.points2.Clear();
+        //aimLine.Draw();
     }
 
     public void EnableRay()
